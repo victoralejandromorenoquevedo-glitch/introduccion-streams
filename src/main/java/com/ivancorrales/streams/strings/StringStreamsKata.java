@@ -64,10 +64,19 @@ public class StringStreamsKata {
     /**
      * NIVEL 2 (2 pasos intermedios)
      * Devuelve los países cuyo nombre termina en "a" y después ordénalos alfabéticamente.
+     * 
      *
      * Requisitos:
      * - El resultado debe estar ordenado (A→Z).
      */
+    public List<String> paisesQueTerminanEnAOrdenadoss(){
+    	return paises.stream()
+    			.filter(p -> p.endsWith("a"))
+    			.sorted()
+    			.toList();
+    }
+    
+    
     public List<String> paisesQueTerminanEnAOrdenados() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -79,6 +88,15 @@ public class StringStreamsKata {
      * - sin repetidos
      * - ordenados alfabéticamente
      */
+    
+    public List<String> paisesMinusculasUnicosOrdenadoss(){
+    	return paises.stream()
+    	.map(s->s.toLowerCase())
+    	.distinct()
+    	.sorted()
+    	.toList();
+    }
+    
     public List<String> paisesMinusculasUnicosOrdenados() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -97,6 +115,15 @@ public class StringStreamsKata {
      * Orden:
      * - Mantén el orden de primera aparición tras normalizar.
      */
+    
+    public List<String> usuariosNormalizadosSinRepetirr(){
+    	return paises.stream()
+    	.map(s->s.toLowerCase().trim())
+    	.distinct()
+    	.sorted()
+    	.toList();
+    }
+    
     public List<String> usuariosNormalizadosSinRepetir() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -117,6 +144,14 @@ public class StringStreamsKata {
      * Pista:
      * - Aquí NO hace falta split ni flatMap: ya trabajas con palabras sueltas.
      */
+    
+    public List<String> hashtagsUnicosOrdenadoss(){
+    	return tokens.stream()
+    	.map(s->s.toLowerCase().trim())
+    	.distinct()
+    	.toList();
+    }
+    
     public List<String> hashtagsUnicosOrdenados() {
         throw new UnsupportedOperationException("TODO");
     }
