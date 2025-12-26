@@ -24,6 +24,7 @@ import java.util.List;
 public class StringStreamsKata {
 
     private final List<String> paises = List.of("Italia", "España", "Portugal", "Irlanda", "Noruega", "Francia");
+
     private final List<String> usuarios = List.of("  noa  ", "LEO", "ana", "Noa", "   Leo ", "mario", "ANA");
 
     private final List<String> tokens = List.of(
@@ -33,6 +34,7 @@ public class StringStreamsKata {
             "sin", "hashtags", "aquí",
             "#dam", "#fp", "#java"
     );
+
     private final List<List<String>> comentariosPorPost = List.of(
             List.of("Brutal", "Me sirve", "  "),
             List.of("Buenísimo", "me sirve", "Gracias!"),
@@ -55,7 +57,7 @@ public class StringStreamsKata {
      * Requisitos:
      * - Conserva el orden original de la lista.
      */
-    public List<String> paisesQueTerminanEnA() {
+    public List<String> resultado1() {
     	return paises.stream()
                 .filter(p -> p.endsWith("a"))
                 .toList();
@@ -69,7 +71,7 @@ public class StringStreamsKata {
      * Requisitos:
      * - El resultado debe estar ordenado (A→Z).
      */
-    public List<String> paisesQueTerminanEnAOrdenadoss(){
+    public List<String> resultado2(){
     	return paises.stream()
     			.filter(p -> p.endsWith("a"))
     			.sorted()
@@ -89,12 +91,12 @@ public class StringStreamsKata {
      * - ordenados alfabéticamente
      */
     
-    public List<String> paisesMinusculasUnicosOrdenadoss(){
+    public List<String> resultado3(){
     	return paises.stream()
-    	.map(s->s.toLowerCase())
-    	.distinct()
-    	.sorted()
-    	.toList();
+    	        .map(String::toLowerCase)
+    	        .distinct()
+    	        .sorted()
+    	        .toList();
     }
     
     public List<String> paisesMinusculasUnicosOrdenados() {
@@ -116,12 +118,12 @@ public class StringStreamsKata {
      * - Mantén el orden de primera aparición tras normalizar.
      */
     
-    public List<String> usuariosNormalizadosSinRepetirr(){
+    public List<String> resultado4(){
     	return paises.stream()
-    	.map(s->s.toLowerCase().trim())
-    	.distinct()
-    	.sorted()
-    	.toList();
+    	        .map(s->s.toLowerCase().trim())
+    	        .distinct()
+    	        .sorted()
+    	        .toList();
     }
     
     public List<String> usuariosNormalizadosSinRepetir() {
@@ -145,11 +147,11 @@ public class StringStreamsKata {
      * - Aquí NO hace falta split ni flatMap: ya trabajas con palabras sueltas.
      */
     
-    public List<String> hashtagsUnicosOrdenadoss(){
+    public List<String> resultado5(){
     	return tokens.stream()
-    	.map(s->s.toLowerCase().trim())
-    	.distinct()
-    	.toList();
+    	        .map(s->s.toLowerCase().trim())
+    	        .distinct()
+    	        .toList();
     }
     
     public List<String> hashtagsUnicosOrdenados() {
@@ -159,12 +161,21 @@ public class StringStreamsKata {
     /**
      * NIVEL 6 (paso a IntStream)
      * Devuelve la suma total de letras de los países que terminan en "a".
-     *
+     * <p>
      * Requisitos:
      * - Antes de contar letras, convierte el país a minúsculas.
      * - Cuenta letras con length().
      * - Convierte a IntStream con mapToInt(...) y termina con sum().
      */
+
+    public int resultado6(){
+        return paises.stream()
+                .filter(s -> s.endsWith("a"))
+                .map(String::toLowerCase)
+                .mapToInt(String::length)
+                .sum();
+    }
+
     public int sumaLetrasPaisesEnA() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -179,6 +190,16 @@ public class StringStreamsKata {
      * - Usa average().
      * - Si no hay hashtags, devuelve 0.0.
      */
+
+    public double resultado7(){
+        return hashtagsPorPost.stream()
+                .map(s->s.toLowerCase().trim())
+                .distinct()
+                .mapToInt(String::length)
+                .average()
+                .orElse(0.0);
+    }
+
     public double mediaLongitudHashtagsUnicos() {
         throw new UnsupportedOperationException("TODO");
     }
@@ -193,10 +214,19 @@ public class StringStreamsKata {
      * - Usa max().
      * - Si no hay hashtags, devuelve 0.
      */
+
+    public int resultado8(){
+        return hashtagsPorPost.stream()
+                .map(s->s.toLowerCase().trim())
+                .distinct()
+                .mapToInt(String::length)
+                .max()
+                .orElse(0);
+    }
     public int longitudMaximaHashtag() {
         throw new UnsupportedOperationException("TODO");
     }
-    
+
     /**
      * NIVEL 9 (primer flatMap “visual”)
      * Devuelve una lista con TODOS los comentarios en una sola lista.
